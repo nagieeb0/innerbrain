@@ -64,7 +64,7 @@ Bun.serve({
     if (url.pathname === "/health") return new Response("ok");
 
     const name = url.pathname === "/" ? "index.html" : url.pathname.slice(1);
-    if (/^[\w-]+\.(html|js|css|svg|png|ico|txt|webp|xml)$/.test(name)) {
+    if (/^[\w-]+\.(html|js|css|svg|png|ico|txt|webp|xml|glb)$/.test(name)) {
       const file = Bun.file(`${PUBLIC}/${name}`);
       if (await file.exists())
         return new Response(file, { headers: { "cache-control": name.endsWith(".html") ? "no-cache" : "public, max-age=3600" } });
