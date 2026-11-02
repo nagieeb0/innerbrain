@@ -402,8 +402,7 @@ footer { padding:40px var(--pad); color:var(--mute); font-size:14px; display:fle
   const mv = document.querySelector('.mini');
   mv.addEventListener('load', () => {
     const mats = mv.model.materials, by = n => mats.find(m => m.name === n);
-    // ponytail: hide the Apple logo (trademark) and tint the status LED with our accent.
-    const logo = by('logo'); if (logo) { logo.setAlphaMode('BLEND'); logo.pbrMetallicRoughness.setBaseColorFactor([0, 0, 0, 0]); }
+    // Real Mac mini, Apple logo kept (we install genuine units); only the status LED takes our accent.
     const led = by('led'); if (led) { led.setEmissiveFactor([.2, .88, .63]); led.pbrMetallicRoughness.setBaseColorFactor([.2, .88, .63, 1]); }
   }, { once: true });
   const orbit = (t, p) => { mv.cameraOrbit = `${t}deg ${p}deg auto`; };
