@@ -1,0 +1,90 @@
+/* motion-kit.css: the CSS half of motion-kit.js (masks, cursor, nav states, hover recipes, ambient loops). */
+:root { --ease: cubic-bezier(.16,1,.3,1); --ease-ui: cubic-bezier(.22,1,.36,1); }
+html, body { overflow-x: clip; }   /* scaled/tilted/flying elements overflow; in RTL that overflow shifts the whole page */
+
+/* word masks for [data-split] / [data-intro-title] */
+.mk-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.mk-wi { display: inline-block; will-change: transform; }
+:lang(ar) .mk-w { padding-bottom: .25em; margin-bottom: -.25em; }          /* Arabic descenders */
+
+/* nav: hide + compact pill (nexapp morph) */
+[data-nav] { position: fixed; inset: 16px 16px auto; z-index: 50; transition: transform .6s var(--ease), max-width .6s var(--ease), border-radius .6s var(--ease), background .4s; max-width: 100%; margin-inline: auto; }
+[data-nav].is-hidden { transform: translateY(calc(-100% - 28px)); }
+[data-nav].is-compact { max-width: 760px; border-radius: 999px; background: color-mix(in srgb, var(--bg, #fff) 80%, transparent); backdrop-filter: blur(14px); }
+[data-progress] { position: fixed; inset: 0 0 auto; height: 2px; transform: scaleX(0); transform-origin: 0 50%; z-index: 60; background: currentColor; }
+[dir=rtl] [data-progress] { transform-origin: 100% 50%; }
+
+/* cursor (enable with <html data-cursor-on>) */
+.mk-on[data-cursor-on] .mk-dot, .mk-on[data-cursor-on] .mk-ring { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 100; border-radius: 50%; }
+.mk-dot { width: 6px; height: 6px; margin: -3px 0 0 -3px; background: currentColor; }
+.mk-ring { width: 40px; height: 40px; margin: -20px 0 0 -20px; border: 1.5px solid currentColor; display: grid; place-items: center;
+  transition: width .5s var(--ease), height .5s var(--ease), margin .5s var(--ease), background .3s; }
+.mk-ring.is-link { width: 64px; height: 64px; margin: -32px 0 0 -32px; }
+.mk-ring.is-label { width: 96px; height: 96px; margin: -48px 0 0 -48px; background: var(--accent, #ffd236); border-color: transparent; }
+.mk-ring b { font: 700 11px/1 system-ui; letter-spacing: .1em; text-transform: uppercase; opacity: 0; transition: opacity .2s; }
+.mk-ring.is-label b { opacity: 1; }
+
+/* button: fill rises, label rolls, arrow turns (plstka .bb) */
+.mk-btn { text-decoration: none; color: inherit; position: relative; overflow: hidden; isolation: isolate; display: inline-flex; align-items: center; gap: 12px; border-radius: 999px; padding: 8px 8px 8px 24px; }
+.mk-btn::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit; background: var(--accent, #ffd236); transform: translateY(101%); transition: transform .6s var(--ease); }
+.mk-btn .t { display: block; overflow: hidden; height: 1.2em; line-height: 1.2; }
+.mk-btn .t span { display: block; transition: transform .6s var(--ease); }
+.mk-btn .ar { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; transition: transform .6s var(--ease); }
+.mk-btn:hover::before { transform: translateY(0); }
+.mk-btn:hover .t span { transform: translateY(-100%); }
+.mk-btn:hover .ar { transform: rotate(-45deg); }
+[dir=rtl] .mk-btn { padding: 8px 24px 8px 8px; }
+[dir=rtl] .mk-btn:hover .ar { transform: rotate(45deg) scaleX(-1); }
+
+/* underline that sweeps out one side and in the other */
+.mk-ulink { position: relative; }
+.mk-ulink::after { content: ""; position: absolute; inset: auto 0 -3px; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: 100% 50%; transition: transform .6s var(--ease); }
+.mk-ulink:hover::after { transform: scaleX(1); transform-origin: 0 50%; }
+
+/* ui-register hovers (Framer sites): color only, .22s quint, no geometry */
+.mk-nudge { transition: opacity .22s var(--ease-ui), transform .22s var(--ease-ui); }
+@media (hover: hover) { .mk-nudge:hover { opacity: .7; transform: translateX(2px); } [dir=rtl] .mk-nudge:hover { transform: translateX(-2px); } }
+.mk-invert { background: #fff; color: var(--ink, #0c0e0d); transition: background-color .22s var(--ease-ui), color .22s var(--ease-ui); }
+.mk-invert:hover { background: var(--ink, #0c0e0d); color: #fff; }
+.mk-swap { background: var(--ink, #0c0e0d); color: #fff; transition: background-color .22s var(--ease-ui); }
+.mk-swap:hover { background: var(--accent, rgb(91,69,217)); }
+.mk-arrow svg, .mk-arrow .ar { transition: transform .3s var(--ease-ui); }
+.mk-arrow:hover svg, .mk-arrow:hover .ar { transform: rotate(45deg); }
+.mk-tab { box-shadow: inset 0 0 0 var(--accent, rgb(91,69,217)); transition: box-shadow .22s var(--ease-ui); }
+.mk-tab:hover { box-shadow: inset 0 -1px 0 var(--accent, rgb(91,69,217)); }          /* hover previews the selected state */
+.mk-tab[aria-selected=true] { box-shadow: inset 0 -2px 0 var(--accent, rgb(91,69,217)); }
+:focus-visible { outline: 3px solid color-mix(in srgb, var(--accent, rgb(126,80,235)) 45%, transparent); outline-offset: 3px; }
+
+/* mobile: grid → swipe row with the next card peeking (nexapp) */
+@media (max-width: 767px) {
+  .mk-swipe { display: flex !important; gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(-1 * var(--pad, 20px)); padding-inline: var(--pad, 20px); scroll-padding-inline: var(--pad, 20px); }
+  .mk-swipe::-webkit-scrollbar { display: none; }
+  .mk-swipe > * { flex: 0 0 82%; scroll-snap-align: start; }
+  .mk-bleed { width: 160% !important; max-width: none !important; margin-inline-start: 0 !important; }   /* nanovate: big product crops, never shrinks */
+  .mk-orbit, .mk-orbit > * { animation-duration: 11s; }
+  /* pinned steps on phones: device on top, only the active caption below (plstka mobile) */
+  [data-steps] { grid-template-columns: 1fr !important; align-content: center; gap: 20px; }
+  [data-steps] [data-step]:not(.is-on) { display: none; }
+  [data-steps] [data-device] { height: 56vh !important; width: auto !important; aspect-ratio: 1 / 2; }
+}
+[data-count] { unicode-bidi: plaintext; }   /* "100K+" stays "100K+" inside RTL text */
+
+/* rule that draws with [data-rule] */
+[data-rule] { --ln: 0; position: relative; }
+[data-rule]::after { content: ""; position: absolute; inset: auto 0 0; height: 1px; background: currentColor; opacity: .2; transform: scaleX(var(--ln)); transform-origin: 0 50%; }
+
+/* 3D stage for [data-tilt-in] and [data-device] */
+.mk-stage { perspective: 1400px; perspective-origin: 50% 0%; }
+
+/* ambient loops */
+@keyframes mk-float { 0%,100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-18px) rotate(-1deg); } }
+@keyframes mk-orbit { to { transform: rotate(360deg); } }
+@keyframes mk-grain { 0%,100% { transform: translate(0,0); } 20% { transform: translate(-4%,3%); } 40% { transform: translate(3%,-5%); } 60% { transform: translate(-2%,4%); } 80% { transform: translate(5%,2%); } }
+.mk-float { animation: mk-float 6s ease-in-out infinite; }
+.mk-orbit { animation: mk-orbit 22s linear infinite; }                 /* nanovate ring; counter-rotate icons with reverse */
+.mk-orbit > * { animation: mk-orbit 22s linear infinite reverse; }
+.mk-grain { position: fixed; inset: -50%; pointer-events: none; z-index: 90; opacity: .06; animation: mk-grain 1s steps(1) infinite;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+@media (prefers-reduced-motion: reduce) { .mk-float, .mk-orbit, .mk-orbit > *, .mk-grain { animation: none; } * { transition-duration: .01ms !important; } }
