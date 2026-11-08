@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://innerbrain.net/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='3' width='26' height='26' rx='7' fill='%23c9ccd1'/%3E%3Ccircle cx='16' cy='16' r='4' fill='%2334e0a1'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="/logo.png"><link rel="apple-touch-icon" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="motion-kit.css">
@@ -35,8 +35,7 @@ section { padding:140px var(--pad); position:relative; }
 nav[data-nav] { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:10px 10px 10px 22px; padding-inline-start:22px; border-radius:16px; background:rgba(22,22,24,.72); backdrop-filter:blur(16px); color:var(--ink); }
 nav[data-nav].is-compact { background:rgba(22,22,24,.82); }
 .brand { display:flex; align-items:center; gap:10px; font:600 18px "Alexandria"; text-decoration:none; direction:ltr; }
-.brand i { width:22px; height:22px; border-radius:6px; background:linear-gradient(145deg,#e4e6ea,#9da1a7); display:grid; place-items:center; }
-.brand i::after { content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 10px var(--accent); }
+.brand img { width:28px; height:28px; border-radius:8px; display:block; }
 .links { display:flex; gap:26px; font-size:15px; } .links a { text-decoration:none; opacity:.8; }
 .pill { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border-radius:999px; background:var(--accent); color:#00140c; font-weight:600; font-size:15px; text-decoration:none; border:0; cursor:pointer; font-family:inherit; transition:background-color .22s var(--ease), color .22s var(--ease); }
 .pill:hover { background:#fff; }
@@ -176,7 +175,7 @@ footer { padding:40px var(--pad); color:var(--mute); font-size:14px; display:fle
 <body>
 <div data-progress style="color:var(--accent)"></div>
 <nav data-nav="hide">
-  <a class="brand" href="#top"><i></i>InnerBrain</a>
+  <a class="brand" href="#top"><img src="/logo.png" alt="" width="28" height="28">InnerBrain</a>
   <div class="links"><a class="mk-nudge" href="#how">كيف يعمل</a><a class="mk-nudge" href="#offer">العرض</a><a class="mk-nudge" href="#pricing">الأسعار</a><a class="mk-nudge" href="#faq">أسئلة</a></div>
   <a class="pill" href="#book">احجز تجربة</a>
 </nav>
