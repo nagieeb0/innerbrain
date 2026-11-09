@@ -14,3 +14,4 @@ Landing page + demo-request form for InnerBrain (private on-prem AI box: Mac min
 
 ## Done
 `bun test` green, page has zero console errors at 1440 and 390 wide, no horizontal scroll, form submit lands a row in `leads`.
+- `public/en.html` is generated: edit `public/index.html`, then run `python3 make_en.py` (fails loudly on any untranslated Arabic; add the new pair to its list).
