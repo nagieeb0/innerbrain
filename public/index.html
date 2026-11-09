@@ -11,6 +11,7 @@
 <meta property="og:url" content="https://innerbrain.net/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#000000">
+<link rel="alternate" hreflang="ar" href="https://innerbrain.net/"><link rel="alternate" hreflang="en" href="https://innerbrain.net/en">
 <link rel="icon" type="image/png" href="/logo.png"><link rel="apple-touch-icon" href="/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
@@ -34,6 +35,8 @@ section { padding:140px var(--pad); position:relative; }
 /* nav */
 nav[data-nav] { display:flex; justify-content:space-between; align-items:center; gap:16px; padding:10px 10px 10px 22px; padding-inline-start:22px; border-radius:16px; background:rgba(22,22,24,.72); backdrop-filter:blur(16px); color:var(--ink); }
 nav[data-nav].is-compact { background:rgba(22,22,24,.82); }
+.lang { font-size:14px; color:var(--mute); text-decoration:none; margin-inline-end:14px; } .lang:hover { color:var(--ink); }
+.preorder { display:inline-block; margin-top:22px; font-size:14px; color:var(--accent); border:1px solid rgba(52,224,161,.35); border-radius:999px; padding:6px 14px; }
 .brand { display:flex; align-items:center; gap:10px; font:600 18px "Alexandria"; text-decoration:none; direction:ltr; }
 .brand img { width:28px; height:28px; border-radius:8px; display:block; }
 .links { display:flex; gap:26px; font-size:15px; } .links a { text-decoration:none; opacity:.8; }
@@ -177,7 +180,7 @@ footer { padding:40px var(--pad); color:var(--mute); font-size:14px; display:fle
 <nav data-nav="hide">
   <a class="brand" href="#top"><img src="/logo.png" alt="" width="28" height="28">InnerBrain</a>
   <div class="links"><a class="mk-nudge" href="#how">كيف يعمل</a><a class="mk-nudge" href="#offer">العرض</a><a class="mk-nudge" href="#pricing">الأسعار</a><a class="mk-nudge" href="#faq">أسئلة</a></div>
-  <a class="pill" href="#book">احجز تجربة</a>
+  <div><a class="lang" href="/en" hreflang="en" lang="en">English</a><a class="pill" href="#book">احجز تجربة</a></div>
 </nav>
 
 <main id="top">
@@ -188,6 +191,7 @@ footer { padding:40px var(--pad); color:var(--mute); font-size:14px; display:fle
     <h1 data-intro-title>عقل شركتك.<br>داخل شركتك.</h1>
     <p class="sub" data-intro-item>جهاز صغير يوضع في مكتبك، يتصل به فريقك عبر الواي فاي، ويجيب من ملفات شركتك بالعربي — بدون إنترنت، وبدون أن تغادر ورقة واحدة المبنى.</p>
     <div class="ctas" data-intro-item><a class="pill" href="#book">احجز تجربة 14 يوماً</a><a class="pill ghost" href="#how">شاهد كيف يعمل</a></div>
+    <p class="preorder" data-intro-item>الحجز المبكر مفتوح · التسليم في ديسمبر · عربون مسترد بالكامل</p>
   </div>
   <div class="stage" aria-hidden="true">
     <div class="glow"></div>
@@ -372,7 +376,7 @@ footer { padding:40px var(--pad); color:var(--mute); font-size:14px; display:fle
       <p class="eyebrow">احجز تجربتك</p>
       <h2 data-split>جرّبه في مكتبك 14 يوماً.</h2>
       <p style="color:#a1a1a6;margin-top:18px">اترك بياناتك، ونتواصل معك خلال يوم عمل لتحديد موعد زيارة.</p>
-      <ul class="promise"><li>زيارة وعرض حي على ملفات تجريبية</li><li>تركيب في يوم عمل واحد</li><li>استرداد كامل إذا لم يستخدمه فريقك</li></ul>
+      <ul class="promise"><li>الحجز المبكر بعربون مسترد بالكامل، والتسليم في ديسمبر</li><li>زيارة وعرض حي على ملفات تجريبية</li><li>تركيب في يوم عمل واحد</li><li>استرداد كامل إذا لم يستخدمه فريقك</li></ul>
     </div>
     <form id="leadForm" novalidate>
       <label>الاسم<input name="name" required autocomplete="name" maxlength="120"></label>
