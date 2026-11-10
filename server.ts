@@ -64,8 +64,16 @@ Bun.serve({
     if (url.pathname === "/health") return new Response("ok");
 
     const name = url.pathname === "/" ? "index.html" : url.pathname.replace(/\/$/, "") === "/en" ? "en.html" : url.pathname.slice(1);
-    if (/^[\w-]+\.(html|js|css|svg|png|ico|txt|webp|xml|glb)$/.test(name)) {
+    if (/^[\w-]+\.(html|js|css|svg|png|ico|txt|webp|xml|glb|mp4)$/.test(name)) {
       const file = Bun.file(`${PUBLIC}/${name}`);
+      // Safari/iOS only plays mp4 with byte-range support
+      const range = req.headers.get("range")?.match(/^bytes=(\d*)-(\d*)$/);
+      if (range && name.endsWith(".mp4") && (await file.exists())) {
+        const start = Number(range[1] || 0), end = Math.min(range[2] ? Number(range[2]) : file.size - 1, file.size - 1);
+        return new Response(file.slice(start, end + 1), { status: 206, headers: {
+          "content-type": "video/mp4", "accept-ranges": "bytes", "content-length": String(end - start + 1),
+          "content-range": `bytes ${start}-${end}/${file.size}`, "cache-control": "public, max-age=3600" } });
+      }
       if (await file.exists())
         return new Response(file, { headers: { "cache-control": name.endsWith(".html") ? "no-cache" : "public, max-age=3600" } });
     }

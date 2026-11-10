@@ -37,6 +37,7 @@ nav[data-nav] { display:flex; justify-content:space-between; align-items:center;
 nav[data-nav].is-compact { background:rgba(22,22,24,.82); }
 .lang { font-size:14px; color:var(--mute); text-decoration:none; margin-inline-end:14px; } .lang:hover { color:var(--ink); }
 .preorder { display:inline-block; margin-top:22px; font-size:14px; color:var(--accent); border:1px solid rgba(52,224,161,.35); border-radius:999px; padding:6px 14px; }
+.demo { padding-top:40px; } .demo .wrap { max-width:980px; margin:0 auto; text-align:center; } .demo video { width:100%; border-radius:20px; border:1px solid var(--line); background:#000; margin-top:26px; } .demo .mute { margin-top:12px; font-size:15px; }
 .brand { display:flex; align-items:center; gap:10px; font:600 18px "Alexandria"; text-decoration:none; direction:ltr; }
 .brand img { width:28px; height:28px; border-radius:8px; display:block; }
 .links { display:flex; gap:26px; font-size:15px; } .links a { text-decoration:none; opacity:.8; }
@@ -179,7 +180,7 @@ footer { padding:40px var(--pad); color:var(--mute); font-size:14px; display:fle
 <div data-progress style="color:var(--accent)"></div>
 <nav data-nav="hide">
   <a class="brand" href="#top"><img src="/logo.png" alt="" width="28" height="28">InnerBrain</a>
-  <div class="links"><a class="mk-nudge" href="#how">How it works</a><a class="mk-nudge" href="#offer">The offer</a><a class="mk-nudge" href="#pricing">Pricing</a><a class="mk-nudge" href="#faq">FAQ</a></div>
+  <div class="links"><a class="mk-nudge" href="#demo">Demo</a><a class="mk-nudge" href="#how">How it works</a><a class="mk-nudge" href="#offer">The offer</a><a class="mk-nudge" href="#pricing">Pricing</a><a class="mk-nudge" href="#faq">FAQ</a></div>
   <div><a class="lang" href="/" hreflang="ar" lang="ar">العربية</a><a class="pill" href="#book">Book a trial</a></div>
 </nav>
 
@@ -209,6 +210,15 @@ footer { padding:40px var(--pad); color:var(--mute); font-size:14px; display:fle
   <div class="wrap">
     <p class="eyebrow">The problem</p>
     <p data-highlight>Right now, someone on your team is pasting a contract, a payroll sheet or client data into ChatGPT. Nobody knows where it goes. InnerBrain gives your team the same power — inside your walls, on your own files.</p>
+  </div>
+</section>
+
+<section class="demo" id="demo">
+  <div class="wrap">
+    <p class="eyebrow" data-fade>Watch the demo</p>
+    <h2 data-split>50 seconds. Three questions. Every answer with its source.</h2>
+    <video src="demo.mp4" poster="demo-poster.png" controls playsinline preload="none"></video>
+    <p class="mute">A real demo running on a local machine with no internet, on sample files: a contract, a leave policy and a report.</p>
   </div>
 </section>
 
